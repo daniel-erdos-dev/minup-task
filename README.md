@@ -41,10 +41,10 @@ Inside the `src` folder:
 
 | Technology       | Purpose                                      |
 | ---------------- | -------------------------------------------- |
-| [React]          | Main UI library                              |
-| [Vite]           | Boilerplating, building and packaging        |
-| [TypeScript]     | Type safety                                  |
-| [Tailwind]       | Atomic CSS — great for MVP/quick prototyping |
-| [Vitest]         | Unit testing                                 |
-| [TanStack Query] | Handling requests                            |
-| [Redux Toolkit]  | Global state management                      |
+| `React`          | Main UI library                              |
+| `Vite`           | Boilerplating, building and packaging        |
+| `TypeScript`     | Type safety                                  |
+| `Tailwind`       | Atomic CSS — great for MVP/quick prototyping |
+| `Vitest`         | Unit testing                                 |
+| `TanStack Query` | Handling requests                            |
+| `Redux Toolkit`  | Global state management                      |
