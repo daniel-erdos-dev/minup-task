@@ -4,9 +4,9 @@ import {useWeeklyCalendar} from "./useWeeklyCalendar";
 import type {Appointment} from "../server/models/Appointment";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {createElement} from "react";
+import {fetchAppointments} from "../server/mockApi";
 
 vi.mock("../server/mockApi");
-import {fetchAppointments} from "../server/mockApi";
 
 const mockFetch = vi.mocked(fetchAppointments);
 
