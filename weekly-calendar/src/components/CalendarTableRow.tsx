@@ -66,6 +66,7 @@ export const CalendarTableRow = ({
           <CollapseButton
             isCollapsed={isCollapsed}
             onClick={() => onToggle(hour)}
+            testId={`collapse-btn-${hour}`}
           />
         </td>
       )}

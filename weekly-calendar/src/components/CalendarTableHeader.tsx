@@ -18,7 +18,11 @@ export const CalendarTableHeader = () => {
           </th>
         ))}
         <th className="px-4 py-2 text-center bg-gray-50 border border-gray-300">
-          <CollapseButton isCollapsed={isAllCollapsed} onClick={collapseAll} />
+          <CollapseButton
+            isCollapsed={isAllCollapsed}
+            onClick={collapseAll}
+            testId="collapse-all-btn"
+          />
         </th>
       </tr>
     </thead>
