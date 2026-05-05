@@ -1,5 +1,8 @@
 # Weekly Calendar
 
+## Demo
+Check out the running app here: [Weekly Calendar](https://minup-task.vercel.app/)
+
 ## How to run this app
 
 1. Clone the repository
