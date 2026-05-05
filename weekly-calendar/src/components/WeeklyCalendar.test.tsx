@@ -1,15 +1,9 @@
 import {render, screen} from "@testing-library/react";
 import {describe, expect, it, vi} from "vitest";
 import {WeeklyCalendar} from "./WeeklyCalendar";
-import {useWeeklyCalendarContext} from "../context/useWeeklyCalendarContext";
+import {useWeeklyCalendar} from "../hooks/useWeeklyCalendar";
 
-vi.mock("../context/useWeeklyCalendarContext");
-
-vi.mock("../context/WeeklyCalendarProvider", () => ({
-  WeeklyCalendarProvider: ({children}: {children: React.ReactNode}) => (
-    <>{children}</>
-  ),
-}));
+vi.mock("../hooks/useWeeklyCalendar");
 
 vi.mock("./CalendarTableBody", () => ({
   CalendarTableBody: vi.fn(() => (
@@ -25,11 +19,11 @@ vi.mock("./CalendarTableHeader", () => ({
   )),
 }));
 
-const mockContext = vi.mocked(useWeeklyCalendarContext);
+const mockHook = vi.mocked(useWeeklyCalendar);
 
 describe("WeeklyCalendar component", () => {
   it("renders the component", () => {
-    mockContext.mockReturnValue({loading: false, error: null} as never);
+    mockHook.mockReturnValue({loading: false, error: null} as never);
     render(<WeeklyCalendar />);
     expect(
       screen.getByTestId("mock-calendar-table-header"),
@@ -38,13 +32,13 @@ describe("WeeklyCalendar component", () => {
   });
 
   it("shows loading state", () => {
-    mockContext.mockReturnValue({loading: true, error: null} as never);
+    mockHook.mockReturnValue({loading: true, error: null} as never);
     render(<WeeklyCalendar />);
     expect(screen.getByText(/Betöltés.../i)).toBeInTheDocument();
   });
 
   it("shows error state", () => {
-    mockContext.mockReturnValue({
+    mockHook.mockReturnValue({
       loading: false,
       error: new Error("Valami hiba történt"),
     } as never);

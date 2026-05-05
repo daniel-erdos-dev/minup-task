@@ -1,5 +1,5 @@
 import {render, screen} from "@testing-library/react";
-import {useWeeklyCalendarContext} from "../context/useWeeklyCalendarContext";
+import {useWeeklyCalendar} from "../hooks/useWeeklyCalendar";
 import {CalendarTableBody} from "./CalendarTableBody";
 import {describe, expect, it, vi} from "vitest";
 import {HOURS} from "../lib/calendarConstants";
@@ -8,7 +8,7 @@ import {Provider} from "react-redux";
 import appointmentReducer from "../store/appointmentSlice";
 import collapsedReducer from "../store/collapsedSlice";
 
-vi.mock("../context/useWeeklyCalendarContext");
+vi.mock("../hooks/useWeeklyCalendar");
 
 vi.mock("./CalendarTableRow", () => ({
   CalendarTableRow: vi.fn(({hour}: {hour: number}) => (
@@ -18,7 +18,7 @@ vi.mock("./CalendarTableRow", () => ({
   )),
 }));
 
-const mockContext = vi.mocked(useWeeklyCalendarContext);
+const mockHook = vi.mocked(useWeeklyCalendar);
 
 const makeContextValue = (overrides = {}) =>
   ({
@@ -46,7 +46,7 @@ const renderBody = () =>
 
 describe("CalendarTableBody component", () => {
   it("renders a row for every hour", () => {
-    mockContext.mockReturnValue(makeContextValue());
+    mockHook.mockReturnValue(makeContextValue());
     renderBody();
     HOURS.forEach((hour) => {
       expect(screen.getByTestId(`mock-row-${hour}`)).toBeInTheDocument();
@@ -54,7 +54,7 @@ describe("CalendarTableBody component", () => {
   });
 
   it("does not render a row for a hidden hour", () => {
-    mockContext.mockReturnValue(
+    mockHook.mockReturnValue(
       makeContextValue({
         isHiddenByCollapse: vi.fn((hour: number) => hour === 12),
       }),
@@ -64,7 +64,7 @@ describe("CalendarTableBody component", () => {
   });
 
   it("renders all non-hidden hours when some are hidden", () => {
-    mockContext.mockReturnValue(
+    mockHook.mockReturnValue(
       makeContextValue({
         isHiddenByCollapse: vi.fn((hour: number) => hour >= 12 && hour <= 14),
       }),

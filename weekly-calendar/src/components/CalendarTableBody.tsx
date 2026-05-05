@@ -1,4 +1,4 @@
-import {useWeeklyCalendarContext} from "../context/useWeeklyCalendarContext";
+import {useWeeklyCalendar} from "../hooks/useWeeklyCalendar";
 import {HOURS} from "../lib/calendarConstants";
 import {CalendarTableRow} from "./CalendarTableRow";
 import {useAppDispatch} from "../store/hooks";
@@ -6,7 +6,7 @@ import {toggleBlock} from "../store/collapsedSlice";
 
 export const CalendarTableBody = () => {
   const {appointments, collapseableBlocks, isHiddenByCollapse, isCollapsed} =
-    useWeeklyCalendarContext();
+    useWeeklyCalendar();
 
   const dispatch = useAppDispatch();
 

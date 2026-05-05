@@ -1,9 +1,9 @@
 import {afterEach, beforeEach, describe, expect, it, vi} from "vitest";
 import {render, screen} from "@testing-library/react";
 import {CalendarTableHeader} from "./CalendarTableHeader";
-import {useWeeklyCalendarContext} from "../context/useWeeklyCalendarContext";
+import {useWeeklyCalendar} from "../hooks/useWeeklyCalendar";
 
-vi.mock("../context/useWeeklyCalendarContext");
+vi.mock("../hooks/useWeeklyCalendar");
 
 vi.mock("./CollapseButton", () => ({
   CollapseButton: vi.fn(() => (
@@ -11,7 +11,7 @@ vi.mock("./CollapseButton", () => ({
   )),
 }));
 
-const mockContext = vi.mocked(useWeeklyCalendarContext);
+const mockHook = vi.mocked(useWeeklyCalendar);
 
 const renderHeader = () => {
   render(
@@ -22,7 +22,7 @@ const renderHeader = () => {
 };
 
 beforeEach(() => {
-  mockContext.mockReturnValue({
+  mockHook.mockReturnValue({
     toggleCollapseAll: vi.fn(),
     isAllCollapsed: false,
   } as never);

@@ -1,9 +1,9 @@
-import {useWeeklyCalendarContext} from "../context/useWeeklyCalendarContext";
+import {useWeeklyCalendar} from "../hooks/useWeeklyCalendar";
 import {DAYS} from "../lib/calendarConstants";
 import {CollapseButton} from "./CollapseButton";
 
 export const CalendarTableHeader = () => {
-  const {toggleCollapseAll, isAllCollapsed} = useWeeklyCalendarContext();
+  const {toggleCollapseAll, isAllCollapsed} = useWeeklyCalendar();
 
   return (
     <thead>

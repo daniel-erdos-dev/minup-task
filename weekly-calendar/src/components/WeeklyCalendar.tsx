@@ -1,10 +1,9 @@
-import {WeeklyCalendarProvider} from "../context/WeeklyCalendarProvider";
-import {useWeeklyCalendarContext} from "../context/useWeeklyCalendarContext";
+import {useWeeklyCalendar} from "../hooks/useWeeklyCalendar";
 import {CalendarTableBody} from "./CalendarTableBody";
 import {CalendarTableHeader} from "./CalendarTableHeader";
 
-const WeeklyCalendarContent = () => {
-  const {loading, error} = useWeeklyCalendarContext();
+export const WeeklyCalendar = () => {
+  const {loading, error} = useWeeklyCalendar();
 
   if (loading) {
     return (
@@ -25,9 +24,3 @@ const WeeklyCalendarContent = () => {
     </table>
   );
 };
-
-export const WeeklyCalendar = () => (
-  <WeeklyCalendarProvider>
-    <WeeklyCalendarContent />
-  </WeeklyCalendarProvider>
-);
