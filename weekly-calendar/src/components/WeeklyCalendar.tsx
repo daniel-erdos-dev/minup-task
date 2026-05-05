@@ -18,9 +18,11 @@ export const WeeklyCalendar = () => {
   }
 
   return (
-    <table className="border-collapse border border-gray-300 rounded-lg w-full sm:max-w-6xl">
-      <CalendarTableHeader />
-      <CalendarTableBody />
-    </table>
+    <div className="overflow-auto w-full sm:max-w-6xl">
+      <table className="border-collapse border border-gray-300 rounded-lg w-full">
+        <CalendarTableHeader />
+        <CalendarTableBody />
+      </table>
+    </div>
   );
 };

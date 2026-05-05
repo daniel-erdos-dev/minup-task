@@ -96,3 +96,21 @@ AI is both our best friend and biggest enemy as a dev. It makes development 1000
 - With some unit testing (configuring vitest, and I wrote some tests, but also let the AI wrote some other test files and I just reviewed the tests there)
 - After I switched to redux toolkit, the AI helped me to weed out the previous Context related logic and to update the tests
 - Helped me with the markdown synthax for this readme (in fact we can thank this neat unordered list to the AI)
+
+## Potential improvements
+It's not looking great on mobile. I added a wrapper div to handle a mobile Safari issue with not being able to scroll to the left side completely, but it's still a massive table on a small screen.
+Would probably need to re-think the design from UX perspective and maybe break the table into 2 parts horizontally and scale the sizes responsively to have a good user experience on mobile too.
+
+Apart from that, it could have a more pleasing design and some animations and some user friendly extra features (like color coding events, etc).
+
+If this would be more like a demo/test site, we could add a re-fetch and error buttons to trigger another fetch from the mock api without refreshing the page, or to trigger a certain mock error response.
+
+With more functionality added UI/E2E tests could be introduced to the application too (Playwright/Cypress/Selenium)
+
+When the app starts to use real data, we need some kind of auth+authZ to handle requests to the real API. I like OAuth2.0 with JWT so that would be my choice for authZ and maybe a mix of social logins and traditional username+password for authentication.
+
+For performance...it's such a tiny app right now, but if it gets bigger, some performance optimization (like code splitting, lazy loading, compression) could be made. If it will be a big app with a lot of "passive" elements, maybe it would be worth thinking about using nextjs for SSR (apart from the collapsing functionality, I think this app would be a pretty decent target for nextjs)
+
+Since this is an interview task, I didn't spend much time with accessibility, but if this would be a real app, that would be another important improvement.
+
+And while I connected the repo with Vercel, so new commits automatically gets shipped online, for a real app, maybe something like AWS or Azure hosting would be preferable along with some pipelines and gates for quality, security, etc.
