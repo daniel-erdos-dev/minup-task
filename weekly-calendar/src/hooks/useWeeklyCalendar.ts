@@ -1,8 +1,15 @@
-import {useMemo, useState} from "react";
+import {useMemo} from "react";
 import type {Appointment} from "../server/models/Appointment";
 import {HOURS} from "../lib/calendarConstants";
 import {fetchAppointments} from "../server/mockApi";
 import {useQuery} from "@tanstack/react-query";
+import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {
+  collapseAllBlocks,
+  expandAllBlocks,
+  selectCollapsedBlocks,
+  selectIsAllCollapsed,
+} from "../store/collapsedSlice";
 
 const getCollapseableBlocks = (appointments: Appointment[]) => {
   const noAppointmentHours = HOURS.filter(
@@ -30,22 +37,13 @@ export const useWeeklyCalendar = () => {
     queryFn: fetchAppointments,
   });
 
-  const [collapsedBlocksStartHours, setCollapsedBlocksStartHours] = useState<
-    number[]
-  >([]);
+  const collapsedBlocksStartHours = useAppSelector(selectCollapsedBlocks);
+  const dispatch = useAppDispatch();
 
   const collapseableBlocks = useMemo(
     () => getCollapseableBlocks(appointments),
     [appointments],
   );
-
-  const toggleBlock = (startHour: number) => {
-    setCollapsedBlocksStartHours((prev) =>
-      prev.includes(startHour)
-        ? prev.filter((h) => h !== startHour)
-        : [...prev, startHour],
-    );
-  };
 
   const isHiddenByCollapse = (hour: number) =>
     collapsedBlocksStartHours.some((startHour) => {
@@ -62,16 +60,20 @@ export const useWeeklyCalendar = () => {
     );
   };
 
-  const collapseAll = () => {
-    if (collapsedBlocksStartHours.length === collapseableBlocks.length) {
-      setCollapsedBlocksStartHours([]);
+  const isAllCollapsedSelector = useMemo(
+    () => selectIsAllCollapsed(collapseableBlocks.map((b) => b.startHour)),
+    [collapseableBlocks],
+  );
+
+  const isAllCollapsed = useAppSelector(isAllCollapsedSelector);
+
+  const toggleCollapseAll = () => {
+    if (isAllCollapsed) {
+      dispatch(expandAllBlocks());
     } else {
-      setCollapsedBlocksStartHours(collapseableBlocks.map((b) => b.startHour));
+      dispatch(collapseAllBlocks(collapseableBlocks.map((b) => b.startHour)));
     }
   };
-
-  const isAllCollapsed =
-    collapsedBlocksStartHours.length === collapseableBlocks.length;
 
   return {
     appointments,
@@ -79,10 +81,9 @@ export const useWeeklyCalendar = () => {
     error,
     collapseableBlocks,
     collapsedBlocksStartHours,
-    toggleBlock,
     isHiddenByCollapse,
     isCollapsed,
-    collapseAll,
+    toggleCollapseAll,
     isAllCollapsed,
   };
 };

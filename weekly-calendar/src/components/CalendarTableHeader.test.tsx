@@ -23,7 +23,7 @@ const renderHeader = () => {
 
 beforeEach(() => {
   mockContext.mockReturnValue({
-    collapseAll: vi.fn(),
+    toggleCollapseAll: vi.fn(),
     isAllCollapsed: false,
   } as never);
 

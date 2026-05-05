@@ -3,6 +3,10 @@ import {useWeeklyCalendarContext} from "../context/useWeeklyCalendarContext";
 import {CalendarTableBody} from "./CalendarTableBody";
 import {describe, expect, it, vi} from "vitest";
 import {HOURS} from "../lib/calendarConstants";
+import {configureStore} from "@reduxjs/toolkit";
+import {Provider} from "react-redux";
+import appointmentReducer from "../store/appointmentSlice";
+import collapsedReducer from "../store/collapsedSlice";
 
 vi.mock("../context/useWeeklyCalendarContext");
 
@@ -26,11 +30,18 @@ const makeContextValue = (overrides = {}) =>
     ...overrides,
   }) as never;
 
+const makeStore = () =>
+  configureStore({
+    reducer: {appointments: appointmentReducer, collapsed: collapsedReducer},
+  });
+
 const renderBody = () =>
   render(
-    <table>
-      <CalendarTableBody />
-    </table>,
+    <Provider store={makeStore()}>
+      <table>
+        <CalendarTableBody />
+      </table>
+    </Provider>,
   );
 
 describe("CalendarTableBody component", () => {

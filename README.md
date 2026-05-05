@@ -32,5 +32,4 @@ Technology used:
 - Tailwind: For atomic CSS which is great for MVP/quick prototyping
 - Vitest: For unit testing
 - Tanstack query: For handling requests
-
 - Redux toolkit: For global state management

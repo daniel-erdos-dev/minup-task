@@ -3,7 +3,7 @@ import {DAYS} from "../lib/calendarConstants";
 import {CollapseButton} from "./CollapseButton";
 
 export const CalendarTableHeader = () => {
-  const {collapseAll, isAllCollapsed} = useWeeklyCalendarContext();
+  const {toggleCollapseAll, isAllCollapsed} = useWeeklyCalendarContext();
 
   return (
     <thead>
@@ -20,7 +20,7 @@ export const CalendarTableHeader = () => {
         <th className="px-4 py-2 text-center bg-gray-50 border border-gray-300">
           <CollapseButton
             isCollapsed={isAllCollapsed}
-            onClick={collapseAll}
+            onClick={toggleCollapseAll}
             testId="collapse-all-btn"
           />
         </th>
