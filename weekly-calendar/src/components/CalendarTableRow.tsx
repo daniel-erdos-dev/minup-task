@@ -6,7 +6,7 @@ import {CollapseButton} from "./CollapseButton";
 
 interface CalendarTableRowProps {
   hour: number;
-  collapsableBlocks: {startHour: number; endHour: number}[];
+  collapseableBlocks: {startHour: number; endHour: number}[];
   appointments: Appointment[];
   isCollapsed: boolean;
   onToggle: (startHour: number) => void;
@@ -14,7 +14,7 @@ interface CalendarTableRowProps {
 
 export const CalendarTableRow = ({
   hour,
-  collapsableBlocks,
+  collapseableBlocks,
   appointments,
   isCollapsed,
   onToggle,
@@ -36,13 +36,13 @@ export const CalendarTableRow = ({
   };
 
   const getHourLabel = () => {
-    const block = collapsableBlocks.find((b) => b.startHour === hour);
+    const block = collapseableBlocks.find((b) => b.startHour === hour);
     return block && isCollapsed && block.endHour - block.startHour > 1
       ? `${hour}:00 - ${block.endHour - 1}:00`
       : `${hour}:00`;
   };
 
-  const shouldShowCollapseButton = collapsableBlocks.some(
+  const shouldShowCollapseButton = collapseableBlocks.some(
     (block) => block.startHour === hour,
   );
 

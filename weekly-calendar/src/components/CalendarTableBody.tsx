@@ -19,7 +19,7 @@ export const CalendarTableBody = () => {
             <CalendarTableRow
               key={hour}
               hour={hour}
-              collapsableBlocks={collapseableBlocks}
+              collapseableBlocks={collapseableBlocks}
               appointments={appointments}
               isCollapsed={isCollapsed(hour)}
               onToggle={toggleBlock}
